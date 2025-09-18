@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechFest 2025 — Event Portal</title>
+  <style>
+    :root{--accent:#2b6cb0;--muted:#666;--bg:#f7f9fc}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:var(--bg);color:#111}
+    .nav-wrap{position:fixed;top:0;left:0;right:0;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);z-index:50}
+    .navbar{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;gap:1rem}
+    .brand{display:flex;align-items:center;gap:0.5rem}
+    .logo{width:40px;height:40px;object-fit:cover}
+    .site-title{font-weight:700}
+    .nav-links{list-style:none;display:flex;gap:1rem;margin:0;padding:0}
+    .nav-links a{text-decoration:none;color:var(--muted)}
+    .login-box .login-form{display:flex;gap:0.4rem;align-items:center}
+    .login-form input{padding:0.25rem 0.4rem}
+    .login-form button{padding:0.3rem 0.6rem}
+    .banner{margin-top:72px;padding:2.2rem 1rem;background:linear-gradient(90deg,var(--accent),#0069a7);color:#fff;text-align:center}
+    .container{max-width:1000px;margin:1.2rem auto;padding:0 1rem}
+    .gallery .grid-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.6rem}
+    .grid-gallery img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    form{background:#fff;padding:1rem;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.04)}
+    fieldset{border:1px solid #eee;padding:0.8rem;margin-bottom:0.8rem}
+    legend{font-weight:600}
+    label{display:block;margin-top:0.6rem;font-size:0.95rem}
+    input[type=text],input[type=email],input[type=tel],input[type=password],input[type=number],input[type=search],input[type=url],input[type=date],textarea,select{width:100%;padding:0.5rem;margin-top:0.25rem;border:1px solid #ddd;border-radius:6px}
+    input[type=file]{margin-top:0.25rem}
+    button{cursor:pointer}
+    .utility{margin-top:0.6rem;padding:0.6rem;border-radius:6px;background:#fafafa}
+    #bmi-result,#cur-result{margin-top:0.5rem}
+    .footer{text-align:center;padding:1rem;color:var(--muted)}
+    .sr-only{position:absolute;left:-9999px}
+    @media(min-width:900px){.navbar{padding:0.6rem 2rem}.container{padding:0 2rem}}
+    input:invalid,textarea:invalid,select:invalid{outline:2px solid rgba(255,0,0,0.08);border-color:#d9534f}
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="navbar">
+      <div class="brand">
+        <img src="university event logo image.jpeg" alt="TechFest Logo" class="logo">
+        <span class="site-title">TechFest 2025</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#intro">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#utilities">Utilities</a></li>
+      </ul>
+      <div class="login-box">
+        <form class="login-form" action="/serverlogic" method="post">
+          <label for="login-user" class="sr-only">User</label>
+          <input id="login-user" name="loginuser" type="text" placeholder="User" required>
+          <label for="login-pass" class="sr-only">Password</label>
+          <input id="login-pass" name="loginpass" type="password" placeholder="Password" required>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="banner">
+      <h1>Welcome to TechFest 2025</h1>
+      <p>Showcase, Compete, and Innovate — Join us!</p>
+    </section>
+
+    <section id="intro" class="intro container">
+      <h2>About the Event</h2>
+      <p>TechFest 2025 brings together students from across the state to present projects, attend workshops, and compete in hackathons.</p>
+    </section>
+
+    <section id="gallery" class="gallery container">
+      <h2>Gallery</h2>
+      <div class="grid-gallery">
+        <img src="university event image_1.jpg" alt="Gallery image 1">
+        <img src="university image_2.webp" alt="Gallery image 2">
+        <img src="university image_3.jpg" alt="Gallery image 3">
+        <img src="university image_4.png" alt="Gallery image 4">
+      </div>
+    </section>
+
+    <section id="register" class="container">
+      <h2>Online Registration</h2>
+      <form id="regForm" action="/serverlogic" method="post" enctype="multipart/form-data" novalidate>
+        <fieldset>
+          <legend>Personal Details</legend>
+          <label for="fullname">Full Name</label>
+          <input id="fullname" name="fullname" type="text" required>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="search" required>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" pattern="[0-9]{10}" required>
+          <label for="dob">Date of Birth</label>
+          <input id="dob" name="dob" type="date" required>
+        </fieldset>
+
+        <fieldset>
+          <legend>Event Choices</legend>
+          <label><input type="radio" name="event" value="hackathon" required> Hackathon</label>
+          <label><input type="radio" name="event" value="paper"> Paper Presentation</label>
+          <label><input type="radio" name="event" value="workshop"> Workshop</label>
+          <p>Preferences:</p>
+          <label><input type="checkbox" name="prefs" value="food"> Food</label>
+          <label><input type="checkbox" name="prefs" value="accommodation"> Accommodation</label>
+          <label><input type="checkbox" name="prefs" value="certificate"> Certificate</label>
+          <label><input type="checkbox" name="prefs" value="volunteer"> Volunteer</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Upload & Bio</legend>
+          <label for="photo">Photo</label>
+          <input id="photo" name="photo" type="file" accept="image/*" required>
+          <label for="bio">Bio</label>
+          <textarea id="bio" name="bio" rows="3" required></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Department</legend>
+          <select id="department" name="department" required>
+            <option value="">--Select--</option>
+            <option value="cse">CSE</option>
+            <option value="ece">ECE</option>
+            <option value="me">Mechanical</option>
+            <option value="ce">Civil</option>
+            <option value="it">IT</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          <legend>Progress</legend>
+          <progress id="formProgress" value="0" max="100">0%</progress>
+        </fieldset>
+
+        <fieldset id="utilities">
+          <legend>Utilities</legend>
+          <div class="utility" id="bmiUtility">
+            <h3>BMI Calculator</h3>
+            <input id="bmi-weight" type="number" placeholder="Weight (kg)">
+            <input id="bmi-height" type="number" placeholder="Height (cm)">
+            <button type="button" id="bmi-calc">Calculate</button>
+            <div id="bmi-result">BMI: —</div>
+          </div>
+          <div class="utility" id="currencyUtility">
+            <h3>Currency Converter</h3>
+            <input id="cur-amount" type="number" value="100">
+            <select id="cur-direction">
+              <option value="inr-to-usd">INR → USD</option>
+              <option value="usd-to-inr">USD → INR</option>
+            </select>
+            <button type="button" id="cur-convert">Convert</button>
+            <div id="cur-result">Result: —</div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; TechFest 2025</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const form=document.getElementById('regForm');
+      const progress=document.getElementById('formProgress');
+      const requiredFields=Array.from(form.querySelectorAll('input[required],textarea[required],select[required]'));
+
+      function updateProgress(){
+        let filled=0;
+        requiredFields.forEach(el=>{
+          if(el.type==='file'){if(el.files.length) filled++;}
+          else if(el.value.trim()!==''){filled++;}
+        });
+        const pct=Math.round((filled/requiredFields.length)*100);
+        progress.value=pct;progress.innerText=pct+'%';
+      }
+      requiredFields.forEach(el=>{el.addEventListener('input',updateProgress);el.addEventListener('change',updateProgress)});
+      document.getElementById('photo').addEventListener('change',function(){
+        const f=this.files[0];if(f&&f.name.toLowerCase().endsWith('.exe')){alert('No exe files');this.value='';}
+        updateProgress();
+      });
+      form.addEventListener('submit',function(e){
+        if(!form.checkValidity()){e.preventDefault();alert('Fix errors first');return}
+        const phone=document.getElementById('phone');
+        if(!/^[0-9]{10}$/.test(phone.value)){e.preventDefault();alert('Invalid phone');phone.focus()}
+      });
+      document.getElementById('bmi-calc').addEventListener('click',function(){
+        const w=parseFloat(document.getElementById('bmi-weight').value);
+        const h=parseFloat(document.getElementById('bmi-height').value)/100;
+        const out=document.getElementById('bmi-result');
+        if(!w||!h){out.textContent='BMI: enter values';return;}
+        const bmi=w/(h*h);let cat='';
+        if(bmi<18.5)cat='Underweight';else if(bmi<24.9)cat='Normal';else if(bmi<29.9)cat='Overweight';else cat='Obese';
+        out.textContent='BMI: '+bmi.toFixed(2)+' ('+cat+')';
+      });
+      updateProgress();
+    });
+
+    $(function(){
+      const rate=0.012;
+      function convert(){
+        const amt=parseFloat($('#cur-amount').val())||0;
+        const dir=$('#cur-direction').val();
+        let res='';
+        if(dir==='inr-to-usd'){res=(amt*rate).toFixed(2)+' USD';}
+        else{res=(amt/rate).toFixed(2)+' INR';}
+        $('#cur-result').text('Result: '+res);
+      }
+      $('#cur-amount').on('keyup',convert);
+      $('#cur-direction').on('change',convert);
+      $('#cur-convert').on('click',convert);
+      convert();
+    });
+  </script>
+</body>
+</html>
